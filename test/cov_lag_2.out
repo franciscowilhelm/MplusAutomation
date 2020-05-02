@@ -1,0 +1,1328 @@
+Mplus VERSION 8.3 (Mac)
+MUTHEN & MUTHEN
+11/11/2019   1:59 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE:
+  BASIC MODEL - LAGGED VARS
+  DATA:
+  FILE = "lag_45fe03332bd6c5a69526a963181fc6ab.dat";
+
+  VARIABLE:
+  NAMES = id time ssf ssw se oe int eng lea net env slf arm ci_g ji_qt ji_ql weng exha
+       hapa ssf_dm ssw_dm se_dm oe_dm int_dm eng_dm lea_dm net_dm env_dm slf_dm arm_dm
+       ci_g_dm ji_qt_dm ji_ql_dm weng_dm exha_dm hapa_dm ssf_gm ssw_gm se_gm oe_gm
+       int_gm eng_gm lea_gm net_gm env_gm slf_gm arm_gm ci_g_gm ji_qt_gm ji_ql_gm
+       weng_gm exha_gm hapa_gm int_l1 se_l1 oe_l1 ji_qt_l1 weng_l1 ssw_l1 ssf_l1
+       exha_l1 hapa_l1 proact_t0 future_t0 posa_t0 nega_t0 over_w_t0 over_h_t0 ssw_t0
+       ssf_t0 auto_t0 cop_t0 ocs_t0 ji_qt_t0 ji_ql_t0 ci_g_t0 lea_t0 net_t0 xpl_t0
+       ARM_dev_t0 ARM_map_t0 ARM_pla_t0 ARM_mon_t0 ARM_fee_t0 xpl_self_t0 ceng_t0
+       se_t0 oe_t0 weng_t0 pe_t0 exha_t0 LAUA_t0 HAPA_t0 esteem_t0 arm_g_t0 csm_g_t0
+       opti_total_t0 opti_opti_t0 opti_pess_t0 age gender org_tenure eds edo_highest;
+
+
+  USEVARIABLES = lea net env slf se_l1 ji_qt_l1;
+  WITHIN = lea net env slf se_l1 ji_qt_l1;
+  !BETWEEN = se_gm ji_qt_gm;
+  MISSING=.;
+  CLASSES = WC(6);
+  CLUSTER = id;
+
+  ANALYSIS:
+  TYPE=MIXTURE TWOLEVEL;
+  STARTS = 1000 50;
+  ESTIMATOR = MLR;
+  PROCESSORS=2;
+
+  MODEL:
+  %WITHIN%
+  %OVERALL%
+  !fixing means may be problematic, because they are in effect intercepts when adding covari
+  ![ WC#1@14.424 ];
+  ![ WC#2@26.202 ];
+  ![ WC#3@24.840 ];
+  ![ WC#4@26.034 ];
+  ![ WC#5@28.138 ];
+  WC on se_l1 ji_qt_l1;
+
+
+  %WC#1%
+  [LEA@1.835 NET@1.505 ENV@1.241 SLF@2.514];
+  LEA@0.701 (5);
+  NET@0.485 (6);
+  ENV@0.216 (7);
+  SLF@0.949 (8);
+  %WC#2%
+  [LEA@4.186 NET@4.096 ENV@1.296 SLF@3.99];
+  LEA@0.701 (5);
+  NET@0.485 (6);
+  ENV@0.216 (7);
+  SLF@0.949 (8);
+  %WC#3%
+  [LEA@4.15 NET@4.123 ENV@3.028 SLF@4.448];
+  LEA@0.701 (5);
+  NET@0.485 (6);
+  ENV@0.216 (7);
+  SLF@0.949 (8);
+  %WC#4%
+  [LEA@2.9 NET@1.861 ENV@3.068 SLF@3.923];
+  LEA@0.701 (5);
+  NET@0.485 (6);
+  ENV@0.216 (7);
+  SLF@0.949 (8);
+  %WC#5%
+  [LEA@3.436 NET@2.229 ENV@1.269 SLF@3.349];
+  LEA@0.701 (5);
+  NET@0.485 (6);
+  ENV@0.216 (7);
+  SLF@0.949 (8);
+  %WC#6%
+  [LEA@4.043 NET@4.275 ENV@4.81 SLF@4.993];
+  LEA@0.701 (5);
+  NET@0.485 (6);
+  ENV@0.216 (7);
+  SLF@0.949 (8);
+
+  %BETWEEN%
+  %OVERALL%
+
+  !covariate regressions
+  !WC ON se_gm ji_qt_gm;
+
+  !free estimation of covariate variances but fixed across classes for FIML
+  !se_gm (b);
+  !ji_qt_gm (c);
+
+
+  !SAVEDATA: FILE = "MLCA4.cprob";
+  !SAVE= CPROB;
+  OUTPUT: CINTERVAL TECH14;
+
+
+
+*** WARNING
+  Input line exceeded 90 characters. Some input may be truncated.
+  !fixing means may be problematic, because they are in effect intercepts when adding covaria
+*** WARNING in MODEL command
+  Variable is uncorrelated with all other variables within class: LEA
+*** WARNING in MODEL command
+  Variable is uncorrelated with all other variables within class: NET
+*** WARNING in MODEL command
+  Variable is uncorrelated with all other variables within class: ENV
+*** WARNING in MODEL command
+  Variable is uncorrelated with all other variables within class: SLF
+*** WARNING in MODEL command
+  At least one variable is uncorrelated with all other variables within class.
+  Check that this is what is intended.
+*** WARNING
+  One or more individual-level variables have no variation within a
+  cluster for the following clusters.
+
+     Variable   Cluster IDs with no within-cluster variation
+
+      LEA         103 59 21
+      NET         3 103 59 32 124 7 105 92
+      ENV         95 6 40 74 116 2 124 96 57 62 7 81 122 44 131 22 92 63 28 69
+      SLF         95 59 4
+      SE_L1       85 6 77 123 74 82 116 84 64 76
+      JI_QT_L1    85 31 59 6 123 83 84 44 131 92
+
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  90
+*** WARNING
+  Data set contains cases with missing on x-variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on x-variables:  167
+*** WARNING
+  Data set contains cases with missing on all variables except
+  x-variables.  These cases were not included in the analysis.
+  Number of cases with missing on all variables except x-variables:  107
+  10 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+BASIC MODEL - LAGGED VARS
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         301
+
+Number of dependent variables                                    4
+Number of independent variables                                  2
+Number of continuous latent variables                            0
+Number of categorical latent variables                           1
+
+Observed dependent variables
+
+  Continuous
+   LEA         NET         ENV         SLF
+
+Observed independent variables
+   SE_L1       JI_QT_L1
+
+Categorical latent variables
+   WC
+
+Variables with special functions
+
+  Cluster variable      ID
+
+  Within variables
+   LEA         NET         ENV         SLF         SE_L1       JI_QT_L1
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                    STANDARD
+  Number of integration points                                  15
+  Dimensions of numerical integration                            0
+  Adaptive quadrature                                           ON
+Random Starts Specifications
+  Number of initial stage random starts                       1000
+  Number of final stage optimizations                           50
+  Number of initial stage iterations                            10
+  Initial stage convergence criterion                    0.100D+01
+  Random starts scale                                    0.500D+01
+  Random seed for generating random starts                       0
+Cholesky                                                       OFF
+
+Input data file(s)
+  lag_45fe03332bd6c5a69526a963181fc6ab.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             3
+     Number of y missing data patterns           3
+     Number of u missing data patterns           0
+     Number of clusters                         91
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR Y
+
+
+           Covariance Coverage
+              LEA           NET           ENV           SLF           SE_L1
+              ________      ________      ________      ________      ________
+ LEA            0.997
+ NET            0.993         0.993
+ ENV            0.997         0.993         0.997
+ SLF            0.997         0.993         0.997         1.000
+ SE_L1          0.997         0.993         0.997         1.000         1.000
+ JI_QT_L1       0.997         0.993         0.997         1.000         1.000
+
+
+           Covariance Coverage
+              JI_QT_L1
+              ________
+ JI_QT_L1       1.000
+
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     LEA                   3.160       0.031       1.000    5.00%       2.000      2.667      3.333
+             300.000       1.547      -0.903       6.000    0.67%       3.667      4.333
+     NET                   2.658       0.410       1.000   18.39%       1.333      2.000      2.333
+             299.000       1.744      -0.909       6.000    0.67%       3.000      4.000
+     ENV                   1.873       1.354       1.000   47.00%       1.000      1.000      1.333
+             300.000       1.325       1.078       6.000    0.33%       1.667      3.000
+     SLF                   3.498      -0.257       1.000    4.98%       2.250      3.250      3.750
+             301.000       1.543      -0.762       6.000    1.99%       4.000      4.750
+     SE_L1                 3.732      -0.825       1.000    0.33%       3.250      3.750      4.000
+             301.000       0.582       0.898       5.000    6.64%       4.000      4.250
+     JI_QT_L1              2.249       1.277       1.500   25.91%       1.500      1.750      2.000
+             301.000       0.573       1.773       5.500    0.33%       2.500      2.750
+
+RANDOM STARTS RESULTS RANKED FROM THE BEST TO THE WORST LOGLIKELIHOOD VALUES
+
+Final stage loglikelihood values at local maxima, seeds, and initial stage start numbers:
+
+           -1638.989  804104           566
+           -1638.989  22362            365
+           -1638.989  490123           995
+           -1638.989  438144           271
+           -1638.989  602032           648
+           -1638.989  369602           146
+           -1638.989  284384           600
+           -1638.989  748692           204
+           -1638.989  897782           545
+           -1638.989  227563           63
+           -1638.989  204959           695
+           -1638.989  655497           376
+           -1638.989  252346           528
+           -1638.989  314034           513
+           -1638.989  254551           996
+           -1638.989  963053           43
+           -1638.989  951709           348
+           -1638.989  364676           27
+           -1638.989  417035           149
+           -1638.989  599729           658
+           -1638.989  737601           891
+           -1638.989  316165           299
+           -1638.989  228459           947
+           -1638.989  830292           527
+           -1638.989  486646           586
+           -1638.989  728038           177
+           -1638.989  92689            304
+           -1638.989  468036           131
+           -1638.989  327140           678
+           -1638.989  164305           128
+           -1638.989  551340           766
+           -1638.989  440368           797
+           -1638.989  351807           617
+           -1638.989  59674            240
+           -1638.989  857122           889
+           -1638.989  714455           476
+           -1638.989  668003           647
+           -1638.989  965639           463
+           -1638.989  220454           288
+           -1638.989  7195             697
+           -1638.989  72662            729
+           -1638.989  714997           399
+           -1638.989  677062           680
+           -1638.989  884242           957
+           -1638.989  782821           272
+           -1638.989  859432           770
+           -1638.989  354624           448
+           -1638.989  7959             256
+           -1638.989  801065           393
+           -1638.990  25127            107
+
+
+
+THE BEST LOGLIKELIHOOD VALUE HAS BEEN REPLICATED.  RERUN WITH AT LEAST TWICE THE
+RANDOM STARTS TO CHECK THAT THE BEST LOGLIKELIHOOD IS STILL OBTAINED AND REPLICATED.
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       15
+
+Loglikelihood
+
+          H0 Value                       -1638.989
+          H0 Scaling Correction Factor      1.6867
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    3307.978
+          Bayesian (BIC)                  3363.585
+          Sample-Size Adjusted BIC        3316.014
+            (n* = (n + 2) / 24)
+
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON ESTIMATED POSTERIOR PROBABILITIES
+
+    Latent
+   Classes
+
+       1         91.33499          0.30344
+       2         55.01100          0.18276
+       3         37.13315          0.12337
+       4         28.73661          0.09547
+       5         69.88877          0.23219
+       6         18.89548          0.06278
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THEIR MOST LIKELY LATENT CLASS MEMBERSHIP
+
+Class Counts and Proportions
+
+    Latent
+   Classes
+
+       1               93          0.30897
+       2               52          0.17276
+       3               39          0.12957
+       4               28          0.09302
+       5               70          0.23256
+       6               19          0.06312
+
+
+CLASSIFICATION QUALITY
+
+     Entropy                         0.819
+
+
+Average Latent Class Probabilities for Most Likely Latent Class Membership (Row)
+by Latent Class (Column)
+
+           1        2        3        4        5        6
+
+    1   0.887    0.001    0.000    0.009    0.104    0.000
+    2   0.002    0.903    0.023    0.003    0.069    0.001
+    3   0.000    0.067    0.857    0.040    0.007    0.029
+    4   0.023    0.004    0.040    0.910    0.019    0.002
+    5   0.116    0.075    0.001    0.011    0.797    0.000
+    6   0.000    0.000    0.069    0.001    0.000    0.930
+
+
+Classification Probabilities for the Most Likely Latent Class Membership (Column)
+by Latent Class (Row)
+
+           1        2        3        4        5        6
+
+    1   0.903    0.001    0.000    0.007    0.089    0.000
+    2   0.001    0.853    0.048    0.002    0.096    0.000
+    3   0.000    0.032    0.900    0.030    0.002    0.035
+    4   0.028    0.005    0.054    0.887    0.026    0.001
+    5   0.139    0.051    0.004    0.008    0.798    0.000
+    6   0.000    0.002    0.059    0.004    0.000    0.935
+
+
+Logits for the Classification Probabilities for the Most Likely Latent Class Membership (Column)
+by Latent Class (Row)
+
+              1        2        3        4        5        6
+
+    1     13.713    7.127    2.077    8.874   11.394    0.000
+    2      6.951   13.657   10.772    7.705   11.471    0.000
+    3     -6.439   -0.089    3.237   -0.154   -2.766    0.000
+    4      3.594    1.805    4.259    7.057    3.522    0.000
+    5     11.839   10.843    8.337    8.960   13.590    0.000
+    6    -13.748   -6.136   -2.756   -5.549  -13.748    0.000
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+Latent Class 1
+
+ Means
+    LEA                1.835      0.000    999.000    999.000
+    NET                1.505      0.000    999.000    999.000
+    ENV                1.241      0.000    999.000    999.000
+    SLF                2.514      0.000    999.000    999.000
+
+ Variances
+    LEA                0.701      0.000    999.000    999.000
+    NET                0.485      0.000    999.000    999.000
+    ENV                0.216      0.000    999.000    999.000
+    SLF                0.949      0.000    999.000    999.000
+
+Latent Class 2
+
+ Means
+    LEA                4.186      0.000    999.000    999.000
+    NET                4.096      0.000    999.000    999.000
+    ENV                1.296      0.000    999.000    999.000
+    SLF                3.990      0.000    999.000    999.000
+
+ Variances
+    LEA                0.701      0.000    999.000    999.000
+    NET                0.485      0.000    999.000    999.000
+    ENV                0.216      0.000    999.000    999.000
+    SLF                0.949      0.000    999.000    999.000
+
+Latent Class 3
+
+ Means
+    LEA                4.150      0.000    999.000    999.000
+    NET                4.123      0.000    999.000    999.000
+    ENV                3.028      0.000    999.000    999.000
+    SLF                4.448      0.000    999.000    999.000
+
+ Variances
+    LEA                0.701      0.000    999.000    999.000
+    NET                0.485      0.000    999.000    999.000
+    ENV                0.216      0.000    999.000    999.000
+    SLF                0.949      0.000    999.000    999.000
+
+Latent Class 4
+
+ Means
+    LEA                2.900      0.000    999.000    999.000
+    NET                1.861      0.000    999.000    999.000
+    ENV                3.068      0.000    999.000    999.000
+    SLF                3.923      0.000    999.000    999.000
+
+ Variances
+    LEA                0.701      0.000    999.000    999.000
+    NET                0.485      0.000    999.000    999.000
+    ENV                0.216      0.000    999.000    999.000
+    SLF                0.949      0.000    999.000    999.000
+
+Latent Class 5
+
+ Means
+    LEA                3.436      0.000    999.000    999.000
+    NET                2.229      0.000    999.000    999.000
+    ENV                1.269      0.000    999.000    999.000
+    SLF                3.349      0.000    999.000    999.000
+
+ Variances
+    LEA                0.701      0.000    999.000    999.000
+    NET                0.485      0.000    999.000    999.000
+    ENV                0.216      0.000    999.000    999.000
+    SLF                0.949      0.000    999.000    999.000
+
+Latent Class 6
+
+ Means
+    LEA                4.043      0.000    999.000    999.000
+    NET                4.275      0.000    999.000    999.000
+    ENV                4.810      0.000    999.000    999.000
+    SLF                4.993      0.000    999.000    999.000
+
+ Variances
+    LEA                0.701      0.000    999.000    999.000
+    NET                0.485      0.000    999.000    999.000
+    ENV                0.216      0.000    999.000    999.000
+    SLF                0.949      0.000    999.000    999.000
+
+Between Level
+
+Categorical Latent Variables
+
+Within Level
+
+ WC#1       ON
+    SE_L1             -1.680      0.622     -2.700      0.007
+    JI_QT_L1          -1.876      0.537     -3.495      0.000
+
+ WC#2       ON
+    SE_L1             -0.640      0.666     -0.961      0.337
+    JI_QT_L1          -2.049      0.546     -3.753      0.000
+
+ WC#3       ON
+    SE_L1             -0.373      0.733     -0.509      0.611
+    JI_QT_L1          -1.150      0.636     -1.807      0.071
+
+ WC#4       ON
+    SE_L1             -1.307      0.693     -1.887      0.059
+    JI_QT_L1          -0.960      0.546     -1.758      0.079
+
+ WC#5       ON
+    SE_L1             -0.752      0.656     -1.147      0.251
+    JI_QT_L1          -1.453      0.527     -2.759      0.006
+
+ Intercepts
+    WC#1              12.543      3.327      3.770      0.000
+    WC#2               8.494      3.482      2.439      0.015
+    WC#3               5.157      4.002      1.289      0.198
+    WC#4               7.923      3.659      2.165      0.030
+    WC#5               7.950      3.270      2.431      0.015
+
+Between Level
+
+
+LOGISTIC REGRESSION ODDS RATIO RESULTS
+
+                                         (Est. - 1) Two-Tailed
+                    Estimate       S.E.     / S.E.    P-Value
+
+Categorical Latent Variables
+
+Within Level
+
+ WC#1     ON
+    SE_L1              0.186      0.116     -7.018      0.000
+    JI_QT_L1           0.153      0.082    -10.297      0.000
+
+ WC#2     ON
+    SE_L1              0.527      0.351     -1.346      0.178
+    JI_QT_L1           0.129      0.070    -12.387      0.000
+
+ WC#3     ON
+    SE_L1              0.689      0.505     -0.617      0.537
+    JI_QT_L1           0.317      0.202     -3.390      0.001
+
+ WC#4     ON
+    SE_L1              0.271      0.187     -3.891      0.000
+    JI_QT_L1           0.383      0.209     -2.951      0.003
+
+ WC#5     ON
+    SE_L1              0.471      0.309     -1.710      0.087
+    JI_QT_L1           0.234      0.123     -6.221      0.000
+
+Between Level
+
+
+ALTERNATIVE PARAMETERIZATIONS FOR THE CATEGORICAL LATENT VARIABLE REGRESSION
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Parameterization using Reference Class 1
+
+ WC#2     ON
+    SE_L1              1.040      0.384      2.712      0.007
+    JI_QT_L1          -0.174      0.408     -0.426      0.670
+
+ WC#3     ON
+    SE_L1              1.307      0.486      2.687      0.007
+    JI_QT_L1           0.726      0.410      1.769      0.077
+
+ WC#4     ON
+    SE_L1              0.373      0.338      1.105      0.269
+    JI_QT_L1           0.916      0.381      2.402      0.016
+
+ WC#5     ON
+    SE_L1              0.928      0.493      1.882      0.060
+    JI_QT_L1           0.423      0.423      0.999      0.318
+
+ WC#6     ON
+    SE_L1              1.680      0.622      2.700      0.007
+    JI_QT_L1           1.876      0.537      3.495      0.000
+
+ Intercepts
+    WC#2              -4.049      1.953     -2.073      0.038
+    WC#3              -7.386      2.444     -3.022      0.003
+    WC#4              -4.620      1.759     -2.626      0.009
+    WC#5              -4.593      2.125     -2.162      0.031
+    WC#6             -12.543      3.327     -3.770      0.000
+
+Parameterization using Reference Class 2
+
+ WC#1     ON
+    SE_L1             -1.040      0.384     -2.712      0.007
+    JI_QT_L1           0.174      0.408      0.426      0.670
+
+ WC#3     ON
+    SE_L1              0.267      0.492      0.542      0.588
+    JI_QT_L1           0.900      0.448      2.006      0.045
+
+ WC#4     ON
+    SE_L1             -0.667      0.467     -1.429      0.153
+    JI_QT_L1           1.090      0.451      2.416      0.016
+
+ WC#5     ON
+    SE_L1             -0.113      0.532     -0.212      0.832
+    JI_QT_L1           0.596      0.405      1.473      0.141
+
+ WC#6     ON
+    SE_L1              0.640      0.666      0.961      0.337
+    JI_QT_L1           2.049      0.546      3.753      0.000
+
+ Intercepts
+    WC#1               4.049      1.953      2.073      0.038
+    WC#3              -3.337      2.687     -1.242      0.214
+    WC#4              -0.571      2.504     -0.228      0.820
+    WC#5              -0.544      2.418     -0.225      0.822
+    WC#6              -8.494      3.482     -2.439      0.015
+
+Parameterization using Reference Class 3
+
+ WC#1     ON
+    SE_L1             -1.307      0.486     -2.687      0.007
+    JI_QT_L1          -0.726      0.410     -1.769      0.077
+
+ WC#2     ON
+    SE_L1             -0.267      0.492     -0.542      0.588
+    JI_QT_L1          -0.900      0.448     -2.006      0.045
+
+ WC#4     ON
+    SE_L1             -0.934      0.558     -1.672      0.094
+    JI_QT_L1           0.190      0.456      0.417      0.677
+
+ WC#5     ON
+    SE_L1             -0.379      0.568     -0.668      0.504
+    JI_QT_L1          -0.304      0.436     -0.696      0.486
+
+ WC#6     ON
+    SE_L1              0.373      0.733      0.509      0.611
+    JI_QT_L1           1.150      0.636      1.807      0.071
+
+ Intercepts
+    WC#1               7.386      2.444      3.022      0.003
+    WC#2               3.337      2.687      1.242      0.214
+    WC#4               2.765      2.917      0.948      0.343
+    WC#5               2.792      2.721      1.026      0.305
+    WC#6              -5.157      4.002     -1.289      0.198
+
+Parameterization using Reference Class 4
+
+ WC#1     ON
+    SE_L1             -0.373      0.338     -1.105      0.269
+    JI_QT_L1          -0.916      0.381     -2.402      0.016
+
+ WC#2     ON
+    SE_L1              0.667      0.467      1.429      0.153
+    JI_QT_L1          -1.090      0.451     -2.416      0.016
+
+ WC#3     ON
+    SE_L1              0.934      0.558      1.672      0.094
+    JI_QT_L1          -0.190      0.456     -0.417      0.677
+
+ WC#5     ON
+    SE_L1              0.555      0.466      1.191      0.234
+    JI_QT_L1          -0.494      0.424     -1.163      0.245
+
+ WC#6     ON
+    SE_L1              1.307      0.693      1.887      0.059
+    JI_QT_L1           0.960      0.546      1.758      0.079
+
+ Intercepts
+    WC#1               4.620      1.759      2.626      0.009
+    WC#2               0.571      2.504      0.228      0.820
+    WC#3              -2.765      2.917     -0.948      0.343
+    WC#5               0.027      2.371      0.011      0.991
+    WC#6              -7.923      3.659     -2.165      0.030
+
+Parameterization using Reference Class 5
+
+ WC#1     ON
+    SE_L1             -0.928      0.493     -1.882      0.060
+    JI_QT_L1          -0.423      0.423     -0.999      0.318
+
+ WC#2     ON
+    SE_L1              0.113      0.532      0.212      0.832
+    JI_QT_L1          -0.596      0.405     -1.473      0.141
+
+ WC#3     ON
+    SE_L1              0.379      0.568      0.668      0.504
+    JI_QT_L1           0.304      0.436      0.696      0.486
+
+ WC#4     ON
+    SE_L1             -0.555      0.466     -1.191      0.234
+    JI_QT_L1           0.494      0.424      1.163      0.245
+
+ WC#6     ON
+    SE_L1              0.752      0.656      1.147      0.251
+    JI_QT_L1           1.453      0.527      2.759      0.006
+
+ Intercepts
+    WC#1               4.593      2.125      2.162      0.031
+    WC#2               0.544      2.418      0.225      0.822
+    WC#3              -2.792      2.721     -1.026      0.305
+    WC#4              -0.027      2.371     -0.011      0.991
+    WC#6              -7.950      3.270     -2.431      0.015
+
+
+ODDS RATIO FOR THE ALTERNATIVE PARAMETERIZATIONS FOR THE CATEGORICAL LATENT VARIABLE REGRESSION
+
+                                         (Est. - 1) Two-Tailed
+                    Estimate       S.E.     / S.E.    P-Value
+
+Parameterization using Reference Class 1
+
+ WC#2     ON
+    SE_L1              2.831      1.086      1.686      0.092
+    JI_QT_L1           0.841      0.343     -0.466      0.642
+
+ WC#3     ON
+    SE_L1              3.696      1.798      1.499      0.134
+    JI_QT_L1           2.067      0.848      1.258      0.208
+
+ WC#4     ON
+    SE_L1              1.453      0.491      0.922      0.357
+    JI_QT_L1           2.500      0.953      1.573      0.116
+
+ WC#5     ON
+    SE_L1              2.529      1.247      1.227      0.220
+    JI_QT_L1           1.526      0.646      0.815      0.415
+
+ WC#6     ON
+    SE_L1              5.367      3.340      1.308      0.191
+    JI_QT_L1           6.526      3.502      1.578      0.115
+
+Parameterization using Reference Class 2
+
+ WC#1     ON
+    SE_L1              0.353      0.136     -4.772      0.000
+    JI_QT_L1           1.190      0.485      0.391      0.696
+
+ WC#3     ON
+    SE_L1              1.306      0.643      0.475      0.634
+    JI_QT_L1           2.459      1.103      1.323      0.186
+
+ WC#4     ON
+    SE_L1              0.513      0.240     -2.032      0.042
+    JI_QT_L1           2.974      1.342      1.471      0.141
+
+ WC#5     ON
+    SE_L1              0.894      0.475     -0.224      0.823
+    JI_QT_L1           1.815      0.735      1.109      0.267
+
+ WC#6     ON
+    SE_L1              1.896      1.263      0.710      0.478
+    JI_QT_L1           7.764      4.240      1.595      0.111
+
+Parameterization using Reference Class 3
+
+ WC#1     ON
+    SE_L1              0.271      0.132     -5.541      0.000
+    JI_QT_L1           0.484      0.199     -2.600      0.009
+
+ WC#2     ON
+    SE_L1              0.766      0.377     -0.621      0.535
+    JI_QT_L1           0.407      0.182     -3.254      0.001
+
+ WC#4     ON
+    SE_L1              0.393      0.219     -2.766      0.006
+    JI_QT_L1           1.209      0.551      0.380      0.704
+
+ WC#5     ON
+    SE_L1              0.684      0.389     -0.812      0.417
+    JI_QT_L1           0.738      0.322     -0.813      0.416
+
+ WC#6     ON
+    SE_L1              1.452      1.065      0.425      0.671
+    JI_QT_L1           3.157      2.009      1.074      0.283
+
+Parameterization using Reference Class 4
+
+ WC#1     ON
+    SE_L1              0.688      0.233     -1.339      0.180
+    JI_QT_L1           0.400      0.153     -3.932      0.000
+
+ WC#2     ON
+    SE_L1              1.949      0.910      1.043      0.297
+    JI_QT_L1           0.336      0.152     -4.375      0.000
+
+ WC#3     ON
+    SE_L1              2.544      1.421      1.087      0.277
+    JI_QT_L1           0.827      0.377     -0.459      0.646
+
+ WC#5     ON
+    SE_L1              1.741      0.811      0.914      0.361
+    JI_QT_L1           0.610      0.259     -1.504      0.133
+
+ WC#6     ON
+    SE_L1              3.695      2.559      1.053      0.292
+    JI_QT_L1           2.611      1.425      1.130      0.258
+
+Parameterization using Reference Class 5
+
+ WC#1     ON
+    SE_L1              0.395      0.195     -3.102      0.002
+    JI_QT_L1           0.655      0.277     -1.243      0.214
+
+ WC#2     ON
+    SE_L1              1.119      0.595      0.200      0.841
+    JI_QT_L1           0.551      0.223     -2.014      0.044
+
+ WC#3     ON
+    SE_L1              1.461      0.830      0.556      0.579
+    JI_QT_L1           1.355      0.591      0.600      0.548
+
+ WC#4     ON
+    SE_L1              0.574      0.267     -1.591      0.112
+    JI_QT_L1           1.638      0.695      0.918      0.359
+
+ WC#6     ON
+    SE_L1              2.122      1.392      0.806      0.420
+    JI_QT_L1           4.277      2.253      1.455      0.146
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.134E-04
+       (ratio of smallest to largest eigenvalue)
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+Latent Class 1
+
+ Means
+    LEA              1.835       1.835       1.835       1.835       1.835       1.835       1.835
+    NET              1.505       1.505       1.505       1.505       1.505       1.505       1.505
+    ENV              1.241       1.241       1.241       1.241       1.241       1.241       1.241
+    SLF              2.514       2.514       2.514       2.514       2.514       2.514       2.514
+
+ Variances
+    LEA              0.701       0.701       0.701       0.701       0.701       0.701       0.701
+    NET              0.485       0.485       0.485       0.485       0.485       0.485       0.485
+    ENV              0.216       0.216       0.216       0.216       0.216       0.216       0.216
+    SLF              0.949       0.949       0.949       0.949       0.949       0.949       0.949
+
+Latent Class 2
+
+ Means
+    LEA              4.186       4.186       4.186       4.186       4.186       4.186       4.186
+    NET              4.096       4.096       4.096       4.096       4.096       4.096       4.096
+    ENV              1.296       1.296       1.296       1.296       1.296       1.296       1.296
+    SLF              3.990       3.990       3.990       3.990       3.990       3.990       3.990
+
+ Variances
+    LEA              0.701       0.701       0.701       0.701       0.701       0.701       0.701
+    NET              0.485       0.485       0.485       0.485       0.485       0.485       0.485
+    ENV              0.216       0.216       0.216       0.216       0.216       0.216       0.216
+    SLF              0.949       0.949       0.949       0.949       0.949       0.949       0.949
+
+Latent Class 3
+
+ Means
+    LEA              4.150       4.150       4.150       4.150       4.150       4.150       4.150
+    NET              4.123       4.123       4.123       4.123       4.123       4.123       4.123
+    ENV              3.028       3.028       3.028       3.028       3.028       3.028       3.028
+    SLF              4.448       4.448       4.448       4.448       4.448       4.448       4.448
+
+ Variances
+    LEA              0.701       0.701       0.701       0.701       0.701       0.701       0.701
+    NET              0.485       0.485       0.485       0.485       0.485       0.485       0.485
+    ENV              0.216       0.216       0.216       0.216       0.216       0.216       0.216
+    SLF              0.949       0.949       0.949       0.949       0.949       0.949       0.949
+
+Latent Class 4
+
+ Means
+    LEA              2.900       2.900       2.900       2.900       2.900       2.900       2.900
+    NET              1.861       1.861       1.861       1.861       1.861       1.861       1.861
+    ENV              3.068       3.068       3.068       3.068       3.068       3.068       3.068
+    SLF              3.923       3.923       3.923       3.923       3.923       3.923       3.923
+
+ Variances
+    LEA              0.701       0.701       0.701       0.701       0.701       0.701       0.701
+    NET              0.485       0.485       0.485       0.485       0.485       0.485       0.485
+    ENV              0.216       0.216       0.216       0.216       0.216       0.216       0.216
+    SLF              0.949       0.949       0.949       0.949       0.949       0.949       0.949
+
+Latent Class 5
+
+ Means
+    LEA              3.436       3.436       3.436       3.436       3.436       3.436       3.436
+    NET              2.229       2.229       2.229       2.229       2.229       2.229       2.229
+    ENV              1.269       1.269       1.269       1.269       1.269       1.269       1.269
+    SLF              3.349       3.349       3.349       3.349       3.349       3.349       3.349
+
+ Variances
+    LEA              0.701       0.701       0.701       0.701       0.701       0.701       0.701
+    NET              0.485       0.485       0.485       0.485       0.485       0.485       0.485
+    ENV              0.216       0.216       0.216       0.216       0.216       0.216       0.216
+    SLF              0.949       0.949       0.949       0.949       0.949       0.949       0.949
+
+Latent Class 6
+
+ Means
+    LEA              4.043       4.043       4.043       4.043       4.043       4.043       4.043
+    NET              4.275       4.275       4.275       4.275       4.275       4.275       4.275
+    ENV              4.810       4.810       4.810       4.810       4.810       4.810       4.810
+    SLF              4.993       4.993       4.993       4.993       4.993       4.993       4.993
+
+ Variances
+    LEA              0.701       0.701       0.701       0.701       0.701       0.701       0.701
+    NET              0.485       0.485       0.485       0.485       0.485       0.485       0.485
+    ENV              0.216       0.216       0.216       0.216       0.216       0.216       0.216
+    SLF              0.949       0.949       0.949       0.949       0.949       0.949       0.949
+
+Between Level
+
+Categorical Latent Variables
+
+ WC#1     ON
+    SE_L1           -3.283      -2.900      -2.704      -1.680      -0.657      -0.461      -0.077
+    JI_QT_L1        -3.258      -2.928      -2.759      -1.876      -0.993      -0.824      -0.493
+
+ WC#2     ON
+    SE_L1           -2.355      -1.945      -1.735      -0.640       0.456       0.666       1.076
+    JI_QT_L1        -3.456      -3.120      -2.948      -2.049      -1.151      -0.979      -0.643
+
+ WC#3     ON
+    SE_L1           -2.262      -1.810      -1.579      -0.373       0.833       1.064       1.516
+    JI_QT_L1        -2.789      -2.397      -2.197      -1.150      -0.103       0.098       0.490
+
+ WC#4     ON
+    SE_L1           -3.091      -2.664      -2.446      -1.307      -0.168       0.051       0.477
+    JI_QT_L1        -2.365      -2.029      -1.857      -0.960      -0.062       0.110       0.446
+
+ WC#5     ON
+    SE_L1           -2.442      -2.038      -1.832      -0.752       0.327       0.533       0.937
+    JI_QT_L1        -2.810      -2.486      -2.320      -1.453      -0.587      -0.421      -0.096
+
+ Intercepts
+    WC#1             3.973       6.022       7.070      12.543      18.016      19.064      21.113
+    WC#2            -0.476       1.668       2.765       8.494      14.223      15.320      17.464
+    WC#3            -5.151      -2.687      -1.426       5.157      11.741      13.001      15.466
+    WC#4            -1.502       0.751       1.904       7.923      13.941      15.094      17.347
+    WC#5            -0.472       1.541       2.571       7.950      13.328      14.358      16.372
+
+Between Level
+
+
+CONFIDENCE INTERVALS FOR THE LOGISTIC REGRESSION ODDS RATIO RESULTS
+
+Categorical Latent Variables
+
+Within Level
+
+ WC#1     ON
+    SE_L1            0.038       0.055       0.067       0.186       0.519       0.631       0.925
+    JI_QT_L1         0.038       0.054       0.063       0.153       0.370       0.439       0.611
+
+ WC#2     ON
+    SE_L1            0.095       0.143       0.176       0.527       1.577       1.946       2.932
+    JI_QT_L1         0.032       0.044       0.052       0.129       0.316       0.376       0.526
+
+ WC#3     ON
+    SE_L1            0.104       0.164       0.206       0.689       2.300       2.898       4.552
+    JI_QT_L1         0.061       0.091       0.111       0.317       0.902       1.103       1.632
+
+ WC#4     ON
+    SE_L1            0.045       0.070       0.087       0.271       0.846       1.052       1.611
+    JI_QT_L1         0.094       0.131       0.156       0.383       0.940       1.116       1.562
+
+ WC#5     ON
+    SE_L1            0.087       0.130       0.160       0.471       1.386       1.705       2.553
+    JI_QT_L1         0.060       0.083       0.098       0.234       0.556       0.656       0.908
+
+Between Level
+
+
+CONFIDENCE INTERVALS FOR THE ALTERNATIVE PARAMETERIZATIONS FOR THE CATEGORICAL LATENT VARIABLE REGRESSION
+
+Parameterization using Reference Class 1
+
+ WC#2     ON
+    SE_L1            0.052       0.289       0.409       1.040       1.672       1.792       2.029
+    JI_QT_L1        -1.223      -0.972      -0.844      -0.174       0.497       0.625       0.876
+
+ WC#3     ON
+    SE_L1            0.054       0.354       0.507       1.307       2.107       2.261       2.560
+    JI_QT_L1        -0.331      -0.078       0.051       0.726       1.401       1.531       1.783
+
+ WC#4     ON
+    SE_L1           -0.497      -0.289      -0.183       0.373       0.929       1.036       1.244
+    JI_QT_L1        -0.066       0.169       0.289       0.916       1.544       1.664       1.899
+
+ WC#5     ON
+    SE_L1           -0.342      -0.038       0.117       0.928       1.739       1.894       2.198
+    JI_QT_L1        -0.667      -0.407      -0.273       0.423       1.119       1.252       1.512
+
+ WC#6     ON
+    SE_L1            0.077       0.461       0.657       1.680       2.704       2.900       3.283
+    JI_QT_L1         0.493       0.824       0.993       1.876       2.759       2.928       3.258
+
+ Intercepts
+    WC#2            -9.080      -7.877      -7.262      -4.049      -0.836      -0.221       0.982
+    WC#3           -13.682     -12.177     -11.407      -7.386      -3.365      -2.595      -1.090
+    WC#4            -9.152      -8.069      -7.515      -4.620      -1.726      -1.172      -0.089
+    WC#5           -10.066      -8.758      -8.088      -4.593      -1.098      -0.429       0.879
+    WC#6           -21.113     -19.064     -18.016     -12.543      -7.070      -6.022      -3.973
+
+Parameterization using Reference Class 2
+
+ WC#1     ON
+    SE_L1           -2.029      -1.792      -1.672      -1.040      -0.409      -0.289      -0.052
+    JI_QT_L1        -0.876      -0.625      -0.497       0.174       0.844       0.972       1.223
+
+ WC#3     ON
+    SE_L1           -1.002      -0.698      -0.543       0.267       1.077       1.232       1.535
+    JI_QT_L1        -0.255       0.021       0.162       0.900       1.638       1.779       2.055
+
+ WC#4     ON
+    SE_L1           -1.869      -1.582      -1.435      -0.667       0.101       0.248       0.535
+    JI_QT_L1        -0.072       0.206       0.348       1.090       1.832       1.974       2.252
+
+ WC#5     ON
+    SE_L1           -1.482      -1.155      -0.987      -0.113       0.762       0.930       1.257
+    JI_QT_L1        -0.447      -0.197      -0.070       0.596       1.262       1.390       1.639
+
+ WC#6     ON
+    SE_L1           -1.076      -0.666      -0.456       0.640       1.735       1.945       2.355
+    JI_QT_L1         0.643       0.979       1.151       2.049       2.948       3.120       3.456
+
+ Intercepts
+    WC#1            -0.982       0.221       0.836       4.049       7.262       7.877       9.080
+    WC#3           -10.258      -8.603      -7.757      -3.337       1.084       1.930       3.585
+    WC#4            -7.020      -5.479      -4.690      -0.571       3.547       4.336       5.878
+    WC#5            -6.772      -5.283      -4.521      -0.544       3.433       4.194       5.683
+    WC#6           -17.464     -15.320     -14.223      -8.494      -2.765      -1.668       0.476
+
+Parameterization using Reference Class 3
+
+ WC#1     ON
+    SE_L1           -2.560      -2.261      -2.107      -1.307      -0.507      -0.354      -0.054
+    JI_QT_L1        -1.783      -1.531      -1.401      -0.726      -0.051       0.078       0.331
+
+ WC#2     ON
+    SE_L1           -1.535      -1.232      -1.077      -0.267       0.543       0.698       1.002
+    JI_QT_L1        -2.055      -1.779      -1.638      -0.900      -0.162      -0.021       0.255
+
+ WC#4     ON
+    SE_L1           -2.372      -2.028      -1.852      -0.934      -0.015       0.161       0.504
+    JI_QT_L1        -0.983      -0.703      -0.559       0.190       0.939       1.083       1.363
+
+ WC#5     ON
+    SE_L1           -1.843      -1.493      -1.314      -0.379       0.555       0.734       1.084
+    JI_QT_L1        -1.427      -1.158      -1.021      -0.304       0.414       0.551       0.820
+
+ WC#6     ON
+    SE_L1           -1.516      -1.064      -0.833       0.373       1.579       1.810       2.262
+    JI_QT_L1        -0.490      -0.098       0.103       1.150       2.197       2.397       2.789
+
+ Intercepts
+    WC#1             1.090       2.595       3.365       7.386      11.407      12.177      13.682
+    WC#2            -3.585      -1.930      -1.084       3.337       7.757       8.603      10.258
+    WC#4            -4.748      -2.952      -2.033       2.765       7.564       8.483      10.279
+    WC#5            -4.216      -2.540      -1.683       2.792       7.268       8.125       9.800
+    WC#6           -15.466     -13.001     -11.741      -5.157       1.426       2.687       5.151
+
+Parameterization using Reference Class 4
+
+ WC#1     ON
+    SE_L1           -1.244      -1.036      -0.929      -0.373       0.183       0.289       0.497
+    JI_QT_L1        -1.899      -1.664      -1.544      -0.916      -0.289      -0.169       0.066
+
+ WC#2     ON
+    SE_L1           -0.535      -0.248      -0.101       0.667       1.435       1.582       1.869
+    JI_QT_L1        -2.252      -1.974      -1.832      -1.090      -0.348      -0.206       0.072
+
+ WC#3     ON
+    SE_L1           -0.504      -0.161       0.015       0.934       1.852       2.028       2.372
+    JI_QT_L1        -1.363      -1.083      -0.939      -0.190       0.559       0.703       0.983
+
+ WC#5     ON
+    SE_L1           -0.645      -0.358      -0.212       0.555       1.321       1.467       1.754
+    JI_QT_L1        -1.587      -1.325      -1.192      -0.494       0.204       0.338       0.599
+
+ WC#6     ON
+    SE_L1           -0.477      -0.051       0.168       1.307       2.446       2.664       3.091
+    JI_QT_L1        -0.446      -0.110       0.062       0.960       1.857       2.029       2.365
+
+ Intercepts
+    WC#1             0.089       1.172       1.726       4.620       7.515       8.069       9.152
+    WC#2            -5.878      -4.336      -3.547       0.571       4.690       5.479       7.020
+    WC#3           -10.279      -8.483      -7.564      -2.765       2.033       2.952       4.748
+    WC#5            -6.079      -4.619      -3.872       0.027       3.926       4.673       6.133
+    WC#6           -17.347     -15.094     -13.941      -7.923      -1.904      -0.751       1.502
+
+Parameterization using Reference Class 5
+
+ WC#1     ON
+    SE_L1           -2.198      -1.894      -1.739      -0.928      -0.117       0.038       0.342
+    JI_QT_L1        -1.512      -1.252      -1.119      -0.423       0.273       0.407       0.667
+
+ WC#2     ON
+    SE_L1           -1.257      -0.930      -0.762       0.113       0.987       1.155       1.482
+    JI_QT_L1        -1.639      -1.390      -1.262      -0.596       0.070       0.197       0.447
+
+ WC#3     ON
+    SE_L1           -1.084      -0.734      -0.555       0.379       1.314       1.493       1.843
+    JI_QT_L1        -0.820      -0.551      -0.414       0.304       1.021       1.158       1.427
+
+ WC#4     ON
+    SE_L1           -1.754      -1.467      -1.321      -0.555       0.212       0.358       0.645
+    JI_QT_L1        -0.599      -0.338      -0.204       0.494       1.192       1.325       1.587
+
+ WC#6     ON
+    SE_L1           -0.937      -0.533      -0.327       0.752       1.832       2.038       2.442
+    JI_QT_L1         0.096       0.421       0.587       1.453       2.320       2.486       2.810
+
+ Intercepts
+    WC#1            -0.879       0.429       1.098       4.593       8.088       8.758      10.066
+    WC#2            -5.683      -4.194      -3.433       0.544       4.521       5.283       6.772
+    WC#3            -9.800      -8.125      -7.268      -2.792       1.683       2.540       4.216
+    WC#4            -6.133      -4.673      -3.926      -0.027       3.872       4.619       6.079
+    WC#6           -16.372     -14.358     -13.328      -7.950      -2.571      -1.541       0.472
+
+
+CONFIDENCE INTERVALS FOR THE ODDS RATIO FOR THE ALTERNATIVE PARAMETERIZATIONS FOR THE
+CATEGORICAL LATENT VARIABLE REGRESSION
+
+Parameterization using Reference Class 1
+
+ WC#2     ON
+    SE_L1            1.054       1.334       1.506       2.831       5.320       6.004       7.604
+    JI_QT_L1         0.294       0.378       0.430       0.841       1.643       1.868       2.401
+
+ WC#3     ON
+    SE_L1            1.056       1.424       1.660       3.696       8.227       9.589      12.938
+    JI_QT_L1         0.718       0.925       1.052       2.067       4.060       4.621       5.950
+
+ WC#4     ON
+    SE_L1            0.608       0.749       0.833       1.453       2.533       2.817       3.469
+    JI_QT_L1         0.936       1.184       1.335       2.500       4.681       5.279       6.676
+
+ WC#5     ON
+    SE_L1            0.711       0.962       1.124       2.529       5.690       6.646       9.003
+    JI_QT_L1         0.513       0.666       0.761       1.526       3.060       3.497       4.537
+
+ WC#6     ON
+    SE_L1            1.081       1.585       1.928       5.367      14.938      18.173      26.659
+    JI_QT_L1         1.638       2.279       2.699       6.526      15.778      18.684      26.001
+
+Parameterization using Reference Class 2
+
+ WC#1     ON
+    SE_L1            0.132       0.167       0.188       0.353       0.664       0.749       0.949
+    JI_QT_L1         0.416       0.535       0.609       1.190       2.326       2.644       3.399
+
+ WC#3     ON
+    SE_L1            0.367       0.497       0.581       1.306       2.935       3.427       4.641
+    JI_QT_L1         0.775       1.021       1.176       2.459       5.143       5.923       7.807
+
+ WC#4     ON
+    SE_L1            0.154       0.206       0.238       0.513       1.106       1.281       1.708
+    JI_QT_L1         0.930       1.228       1.416       2.974       6.247       7.200       9.506
+
+ WC#5     ON
+    SE_L1            0.227       0.315       0.373       0.894       2.143       2.534       3.516
+    JI_QT_L1         0.640       0.821       0.933       1.815       3.534       4.015       5.152
+
+ WC#6     ON
+    SE_L1            0.341       0.514       0.634       1.896       5.672       6.996      10.543
+    JI_QT_L1         1.902       2.662       3.162       7.764      19.063      22.641      31.690
+
+Parameterization using Reference Class 3
+
+ WC#1     ON
+    SE_L1            0.077       0.104       0.122       0.271       0.602       0.702       0.947
+    JI_QT_L1         0.168       0.216       0.246       0.484       0.950       1.081       1.392
+
+ WC#2     ON
+    SE_L1            0.215       0.292       0.341       0.766       1.722       2.011       2.723
+    JI_QT_L1         0.128       0.169       0.194       0.407       0.850       0.979       1.291
+
+ WC#4     ON
+    SE_L1            0.093       0.132       0.157       0.393       0.985       1.174       1.656
+    JI_QT_L1         0.374       0.495       0.572       1.209       2.558       2.953       3.910
+
+ WC#5     ON
+    SE_L1            0.158       0.225       0.269       0.684       1.743       2.084       2.957
+    JI_QT_L1         0.240       0.314       0.360       0.738       1.513       1.735       2.270
+
+ WC#6     ON
+    SE_L1            0.220       0.345       0.435       1.452       4.852       6.113       9.601
+    JI_QT_L1         0.613       0.907       1.108       3.157       8.994      10.990      16.262
+
+Parameterization using Reference Class 4
+
+ WC#1     ON
+    SE_L1            0.288       0.355       0.395       0.688       1.200       1.335       1.644
+    JI_QT_L1         0.150       0.189       0.214       0.400       0.749       0.845       1.068
+
+ WC#2     ON
+    SE_L1            0.585       0.780       0.904       1.949       4.200       4.865       6.485
+    JI_QT_L1         0.105       0.139       0.160       0.336       0.706       0.814       1.075
+
+ WC#3     ON
+    SE_L1            0.604       0.852       1.015       2.544       6.374       7.600      10.719
+    JI_QT_L1         0.256       0.339       0.391       0.827       1.750       2.019       2.673
+
+ WC#5     ON
+    SE_L1            0.525       0.699       0.809       1.741       3.746       4.338       5.778
+    JI_QT_L1         0.205       0.266       0.304       0.610       1.227       1.402       1.821
+
+ WC#6     ON
+    SE_L1            0.621       0.951       1.182       3.695      11.545      14.360      21.998
+    JI_QT_L1         0.640       0.896       1.064       2.611       6.407       7.609      10.648
+
+Parameterization using Reference Class 5
+
+ WC#1     ON
+    SE_L1            0.111       0.150       0.176       0.395       0.890       1.039       1.407
+    JI_QT_L1         0.220       0.286       0.327       0.655       1.314       1.502       1.949
+
+ WC#2     ON
+    SE_L1            0.284       0.395       0.467       1.119       2.684       3.174       4.403
+    JI_QT_L1         0.194       0.249       0.283       0.551       1.072       1.218       1.563
+
+ WC#3     ON
+    SE_L1            0.338       0.480       0.574       1.461       3.721       4.450       6.314
+    JI_QT_L1         0.441       0.576       0.661       1.355       2.776       3.185       4.166
+
+ WC#4     ON
+    SE_L1            0.173       0.231       0.267       0.574       1.236       1.431       1.906
+    JI_QT_L1         0.549       0.713       0.815       1.638       3.292       3.763       4.887
+
+ WC#6     ON
+    SE_L1            0.392       0.587       0.721       2.122       6.244       7.677      11.499
+    JI_QT_L1         1.101       1.523       1.798       4.277      10.172      12.008      16.608
+
+
+TECHNICAL 14 OUTPUT
+
+     Random Starts Specifications for the k-1 Class Analysis Model
+        Number of initial stage random starts                1000
+        Number of final stage optimizations                    50
+
+     Random Starts Specification for the k-1 Class Model for Generated Data
+        Number of initial stage random starts                   0
+        Number of final stage optimizations for the
+           initial stage random starts                          0
+     Random Starts Specification for the k Class Model for Generated Data
+        Number of initial stage random starts                  40
+        Number of final stage optimizations                     8
+     Number of bootstrap draws requested                   Varies
+
+
+     PARAMETRIC BOOTSTRAPPED LIKELIHOOD RATIO TEST FOR 5 (H0) VERSUS 6 CLASSES
+
+          H0 Loglikelihood Value                        -1825.498
+          2 Times the Loglikelihood Difference            373.017
+          Difference in the Number of Parameters                3
+          Approximate P-Value                              0.0000
+          Successful Bootstrap Draws                            5
+
+
+     Beginning Time:  13:59:05
+        Ending Time:  13:59:33
+       Elapsed Time:  00:00:28
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2019 Muthen & Muthen
